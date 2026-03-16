@@ -1,170 +1,117 @@
-\# IPL 2025 Simulator \& Predictor (85.1% Accuracy)
+# IPL 2025 Simulator & Predictor (85.1% Accuracy)
 
+A personal project building an automated IPL season simulator and machine learning match predictor.
 
+**Final accuracy:** 85.1% across all 74 IPL matches using player performance attributes and phase-level match data.
 
-My personal project: Full automated IPL 2025 simulation + machine learning predictor.
+---
 
+## Overview
 
+This project simulates an IPL season and predicts match outcomes using structured player data and match phase statistics.
 
-\*\*Final accuracy:\*\* 85.1% on all 74 matches (using player stats + Cricsheet-style phase analysis).
+Key ideas used in the model:
 
+- Player attributes (Power, Innovation, Acceleration)
+- Team composition effects
+- Phase-based match analysis (Powerplay, Middle overs, Death overs)
+- Ball-by-ball data inspired by Cricsheet JSON structure
 
+---
 
-\---
+## Features
 
+- Generated a database of **202 players** with performance attributes
+- Simulated a full **74-match IPL season**
+- Built and iterated through **three predictor versions**
+- Integrated **phase-based match features** to significantly improve prediction accuracy
 
+---
 
-\## What I Built
-
-\- Generated 202 players with Power, Innovation, Acceleration stats
-
-\- Simulated full 74-match season
-
-\- Built 3 versions of predictor (v1 → v3)
-
-\- Used ball-by-ball JSON phase data (Powerplay, Death overs, extras) to reach 85%
-
-
-
-\---
-
-
-
-\## Project Structure
-
-
+## Project Structure
 
 ```
+data/                  # Input datasets
+├── player_db.csv
+├── automated_matches_2025.csv
+├── automated_matches_2024.csv
 
-data/                  ← All input files
+scripts/               # Core code
+├── ipl_predictor_v3.py
+├── generate_db.py
+├── build_match_log.py
 
-├── player\_db.csv
-
-├── automated\_matches\_2025.csv
-
-├── automated\_matches\_2024.csv
-
-
-
-scripts/               ← All code
-
-├── ipl\_predictor\_v3.py     ← Best version (run this!)
-
-├── generate\_db.py
-
-├── build\_match\_log.py
-
-
-
-outputs/               ← Results
-
-├── predictions\_2025\_with\_json.csv   ← Final predictions
-
+outputs/               # Model results
+├── predictions_2025_with_json.csv
 ```
 
+---
 
+## Installation
 
-\---
-
-
-
-\## How to Run (for my friend)
-
-
-
-\### 1. Clone
-
-
+Clone the repository:
 
 ```bash
-
 git clone https://github.com/Claws333/ipl-2025-predictor.git
-
 cd ipl-2025-predictor
-
 ```
 
-
-
-\### 2. Install dependencies
-
-
+Install dependencies:
 
 ```bash
-
 pip install pandas numpy scikit-learn
-
 ```
 
+---
 
+## Running the Predictor
 
-\### 3. Run the best model
-
-
+Execute the main prediction script:
 
 ```bash
-
-python scripts/ipl\_predictor\_v3.py
-
+python scripts/ipl_predictor_v3.py
 ```
 
+The script will train the model and generate match predictions.
 
-
-You will see \*\*85% accuracy printed\*\* + new predictions generated.
-
-
-
-\---
-
-
-
-\## Accuracy Journey
-
-
-
-\- v1: \*\*52.7%\*\*
-
-\- v2: \*\*67.6%\*\*
-
-\- v3: \*\*85.1%\*\* (added phase stats from JSONs)
-
-
-
-\---
-
-
-
-\## Extending to 2026
-
-
-
-Want to see 2026 predictions?
-
-
-
-Just add new players to:
-
-
+Results will be saved in:
 
 ```
-
-data/player\_db.csv
-
+outputs/predictions_2025_with_json.csv
 ```
 
+---
 
+## Accuracy Progression
 
-Then run the same script.
+| Version | Approach | Accuracy |
+|-------|--------|--------|
+| v1 | Basic team statistics | 52.7% |
+| v2 | Player attribute features | 67.6% |
+| v3 | Added phase-level match stats | **85.1%** |
 
+---
 
+## Extending the Model
 
-\---
+To simulate or predict future seasons:
 
+1. Update player data in
 
+```
+data/player_db.csv
+```
 
-Made purely for learning. Feel free to fork!
+2. Run the predictor again:
 
+```bash
+python scripts/ipl_predictor_v3.py
+```
 
+---
 
-Questions? DM me.
+## Notes
 
+This project was built for experimentation and learning in sports analytics and machine learning.
+
+Contributions and improvements are welcome.
