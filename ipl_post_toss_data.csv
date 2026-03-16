@@ -1,0 +1,71 @@
+Match_ID,Team_A,Team_B,Venue,Toss_Winner,Toss_Decision,Team_A_Form_Score,Team_B_Form_Score,Team_A_Likely_Sub,Team_B_Likely_Sub,Actual_Winner
+1,KKR,RCB,Eden Gardens,KKR,bowl,82,85,Suyash Sharma,Yash Dayal,RCB
+2,SRH,RR,Rajiv Gandhi Stadium,RR,bowl,80,81,Washington Sundar,Sandeep Sharma,SRH
+3,MI,CSK,M.A. Chidambaram Stadium,CSK,bowl,84,82,Piyush Chawla,Shivam Dube,CSK
+4,LSG,DC,ACA-VDCA Stadium,DC,bowl,78,79,Amit Mishra,Abishek Porel,DC
+5,PBKS,GT,Narendra Modi Stadium,GT,bowl,85,83,Prabhsimran Singh,Sai Sudharsan,PBKS
+6,RR,KKR,Barsapara Stadium,RR,bat,80,82,Rovman Powell,Manish Pandey,KKR
+7,SRH,LSG,Rajiv Gandhi Stadium,SRH,bat,81,77,T Natarajan,Ayush Badoni,LSG
+8,RCB,CSK,M.A. Chidambaram Stadium,CSK,bowl,86,81,Karn Sharma,Matheesha Pathirana,RCB
+9,GT,MI,Narendra Modi Stadium,GT,bowl,82,83,Mohit Sharma,Suryakumar Yadav,GT
+10,SRH,DC,ACA-VDCA Stadium,DC,bowl,79,80,Mayank Markande,Khaleel Ahmed,DC
+11,RR,CSK,Barsapara Stadium,CSK,bowl,81,79,Nandre Burger,Mustafizur Rahman,RR
+12,KKR,MI,Wankhede Stadium,MI,bowl,80,84,Anukul Roy,Nehal Wadhera,MI
+13,LSG,PBKS,Ekana Stadium,LSG,bat,76,86,Krishnappa Gowtham,Arshdeep Singh,PBKS
+14,RCB,GT,M. Chinnaswamy Stadium,RCB,bowl,87,81,Mahipal Lomror,Shahrukh Khan,GT
+15,KKR,SRH,Eden Gardens,KKR,bowl,82,78,Vaibhav Arora,Rahul Tripathi,KKR
+16,LSG,MI,Ekana Stadium,MI,bowl,78,85,Deepak Hooda,Akash Madhwal,LSG
+17,DC,CSK,M.A. Chidambaram Stadium,CSK,bowl,81,80,Lalit Yadav,Shardul Thakur,DC
+18,RR,PBKS,Maharaja Yadavindra Singh,PBKS,bowl,83,86,Shubham Dubey,Harpreet Brar,RR
+19,SRH,GT,Rajiv Gandhi Stadium,SRH,bat,79,82,Umran Malik,Vijay Shankar,GT
+20,RCB,MI,Wankhede Stadium,MI,bowl,88,86,Rajat Patidar,Romario Shepherd,RCB
+21,LSG,KKR,Eden Gardens,KKR,bowl,77,83,Prerak Mankad,Chetan Sakariya,LSG
+22,PBKS,CSK,Maharaja Yadavindra Singh,PBKS,bat,87,80,Vidwath Kaverappa,Sameer Rizvi,PBKS
+23,GT,RR,Narendra Modi Stadium,GT,bowl,84,82,Darshan Nalkande,Navdeep Saini,GT
+24,RCB,DC,M. Chinnaswamy Stadium,DC,bowl,86,82,Vyshak Vijaykumar,Pravin Dubey,DC
+25,CSK,KKR,M.A. Chidambaram Stadium,CSK,bowl,79,84,Mukesh Choudhary,Ramandeep Singh,KKR
+26,GT,LSG,Ekana Stadium,LSG,bowl,83,78,Abhinav Manohar,Yudhvir Singh,LSG
+27,PBKS,SRH,Rajiv Gandhi Stadium,SRH,bowl,88,80,Rilee Rossouw,Glenn Phillips,SRH
+28,RR,RCB,Sawai Mansingh Stadium,RR,bat,81,89,Donovan Ferreira,Swapnil Singh,RCB
+29,MI,DC,Arun Jaitley Stadium,DC,bowl,85,81,Naman Dhir,Ricky Bhui,MI
+30,LSG,CSK,Ekana Stadium,LSG,bowl,79,80,Arshad Khan,Nishant Sindhu,CSK
+31,PBKS,KKR,Maharaja Yadavindra Singh,KKR,bowl,86,82,Sikandar Raza,Srikar Bharat,PBKS
+32,DC,RR,Arun Jaitley Stadium,DC,bat,82,80,Jhye Richardson,Kuldeep Sen,DC
+33,SRH,MI,Wankhede Stadium,MI,bowl,81,86,Sanvir Singh,Shivalik Sharma,MI
+34,RCB,PBKS,M. Chinnaswamy Stadium,PBKS,bowl,88,87,Suyash Prabhudessai,Nathan Ellis,PBKS
+35,DC,GT,Narendra Modi Stadium,GT,bowl,83,84,Sumit Kumar,Spencer Johnson,GT
+36,LSG,RR,Sawai Mansingh Stadium,RR,bowl,80,82,Manimaran Siddharth,Tom Kohler-Cadmore,LSG
+37,PBKS,RCB,M. Chinnaswamy Stadium,RCB,bowl,86,87,Rahul Chahar,Will Jacks,RCB
+38,CSK,MI,Wankhede Stadium,MI,bowl,81,85,Ajinkya Rahane,Mohammad Nabi,MI
+39,GT,KKR,Eden Gardens,KKR,bowl,83,81,Joshua Little,Angkrish Raghuvanshi,GT
+40,LSG,DC,ACA-VDCA Stadium,DC,bowl,78,82,Kyle Mayers,Ishant Sharma,DC
+41,SRH,MI,Rajiv Gandhi Stadium,MI,bowl,80,86,Fazalhaq Farooqi,Nuwan Thushara,MI
+42,RCB,RR,Sawai Mansingh Stadium,RR,bowl,89,81,Lockie Ferguson,Avesh Khan,RCB
+43,CSK,SRH,M.A. Chidambaram Stadium,CSK,bat,80,81,Rajvardhan Hangargekar,Jaydev Unadkat,SRH
+44,PBKS,KKR,Eden Gardens,KKR,bowl,87,83,Chris Woakes,Sherfane Rutherford,PBKS
+45,MI,LSG,Ekana Stadium,LSG,bowl,85,79,Dilshan Madushanka,Ashton Turner,MI
+46,DC,RCB,Arun Jaitley Stadium,RCB,bowl,81,88,Shai Hope,Cameron Green,RCB
+47,GT,CSK,Narendra Modi Stadium,GT,bat,84,80,Matthew Wade,Maheesh Theekshana,GT
+48,RR,SRH,Sawai Mansingh Stadium,RR,bowl,82,79,Keshav Maharaj,Marco Jansen,RR
+49,KKR,LSG,Eden Gardens,KKR,bat,84,78,Dushmantha Chameera,David Willey,KKR
+50,MI,PBKS,Wankhede Stadium,MI,bowl,86,88,Gerald Coetzee,Kagiso Rabada,PBKS
+51,DC,CSK,Arun Jaitley Stadium,DC,bat,83,79,Yash Dhull,Deepak Chahar,DC
+52,RCB,GT,M. Chinnaswamy Stadium,RCB,bowl,90,83,Mohammed Siraj,Rashid Khan,RCB
+53,KKR,RR,Eden Gardens,KKR,bat,83,81,Sunil Narine,Trent Boult,KKR
+54,PBKS,LSG,HPCA Stadium,LSG,bowl,89,77,Sam Curran,Krunal Pandya,PBKS
+55,SRH,DC,Rajiv Gandhi Stadium,SRH,bat,80,82,Abdul Samad,Axar Patel,SRH
+56,MI,GT,Wankhede Stadium,GT,bowl,84,85,Tim David,David Miller,MI
+57,KKR,CSK,Eden Gardens,CSK,bowl,85,78,Andre Russell,Ravindra Jadeja,KKR
+58,RCB,KKR,M. Chinnaswamy Stadium,RCB,bowl,91,84,Glenn Maxwell,Mitchell Starc,RCB
+59,RR,PBKS,Barsapara Stadium,PBKS,bowl,82,88,Riyan Parag,Shashank Singh,RR
+60,DC,GT,Arun Jaitley Stadium,DC,bat,83,84,Rishabh Pant,Shubman Gill,DC
+61,LSG,SRH,Ekana Stadium,LSG,bat,79,81,Nicholas Pooran,Heinrich Klaasen,SRH
+62,CSK,RR,M.A. Chidambaram Stadium,CSK,bowl,79,83,Ruturaj Gaikwad,Sanju Samson,RR
+63,MI,DC,Wankhede Stadium,MI,bat,85,84,Rohit Sharma,Jake Fraser-McGurk,MI
+64,GT,LSG,Narendra Modi Stadium,GT,bowl,86,78,Sai Kishore,Marcus Stoinis,LSG
+65,RCB,SRH,Ekana Stadium,SRH,bowl,92,82,Virat Kohli,Pat Cummins,SRH
+66,PBKS,DC,Sawai Mansingh Stadium,PBKS,bat,89,83,Jonny Bairstow,Tristan Stubbs,DC
+67,GT,CSK,Narendra Modi Stadium,CSK,bowl,85,78,Kane Williamson,Daryl Mitchell,CSK
+68,SRH,KKR,Arun Jaitley Stadium,SRH,bat,83,85,Travis Head,Phil Salt,SRH
+69,PBKS,MI,Sawai Mansingh Stadium,PBKS,bowl,90,86,Ashutosh Sharma,Jasprit Bumrah,PBKS
+70,LSG,RCB,Ekana Stadium,RCB,bowl,78,93,Quinton de Kock,Faf du Plessis,RCB
