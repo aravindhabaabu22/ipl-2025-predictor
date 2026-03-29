@@ -41,9 +41,15 @@ if st.button("Predict 🔮"):
 
     # Boundary prediction based on score
     def predict_boundaries(score):
-        fours = int(score * 0.28 + random.randint(-5,5))
-        sixes = int(score * 0.12 + random.randint(-3,3))
-        return max(10, fours), max(3, sixes)
+    # realistic ranges
+    fours = int(score / 10 + random.randint(-2, 3))   # ~15–22
+    sixes = int(score / 18 + random.randint(-1, 2))   # ~6–12
+    
+    # safety limits
+    fours = max(10, min(fours, 25))
+    sixes = max(3, min(sixes, 15))
+
+    return fours, sixes
 
     fours1, sixes1 = predict_boundaries(score1)
     fours2, sixes2 = predict_boundaries(score2)
