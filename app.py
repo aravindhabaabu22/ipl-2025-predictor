@@ -14,7 +14,7 @@ score = st.number_input("Current Score", value=0)
 overs = st.number_input("Overs", value=0)
 wickets = st.number_input("Wickets", value=0)
 
-# Team base strength
+# Team base strength (tuned realistic)
 team_strength = {
     "MI": 170,
     "CSK": 175,
@@ -23,6 +23,18 @@ team_strength = {
     "SRH": 168
 }
 
+# ✅ FIXED boundary prediction (realistic)
+def predict_boundaries(score):
+    fours = int(score / 10 + random.randint(-2, 3))   # ~15–22
+    sixes = int(score / 18 + random.randint(-1, 2))   # ~6–12
+    
+    fours = max(10, min(fours, 25))
+    sixes = max(3, min(sixes, 15))
+
+    return fours, sixes
+
+
+# 🔮 BUTTON TRIGGER
 if st.button("Predict 🔮"):
 
     # Base scores
@@ -39,18 +51,7 @@ if st.button("Predict 🔮"):
     score1 = int(base1)
     score2 = int(base2)
 
-    # Boundary prediction based on score
-    def predict_boundaries(score):
-    # realistic ranges
-    fours = int(score / 10 + random.randint(-2, 3))   # ~15–22
-    sixes = int(score / 18 + random.randint(-1, 2))   # ~6–12
-    
-    # safety limits
-    fours = max(10, min(fours, 25))
-    sixes = max(3, min(sixes, 15))
-
-    return fours, sixes
-
+    # Boundary predictions
     fours1, sixes1 = predict_boundaries(score1)
     fours2, sixes2 = predict_boundaries(score2)
 
