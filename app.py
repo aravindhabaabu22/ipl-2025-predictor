@@ -1,66 +1,70 @@
 import streamlit as st
 import random
 
-st.title("IPL Smart Predictor 🔥")
+st.title("IPL Full Match Predictor 🔥")
 
 teams = ["MI","CSK","RCB","KKR","SRH"]
 
 team1 = st.selectbox("Team 1", teams)
 team2 = st.selectbox("Team 2", teams)
 
-st.subheader("Optional Match Inputs (can skip)")
+st.subheader("Optional Live Inputs (can skip)")
 
-score = st.number_input("Score", value=0)
+score = st.number_input("Current Score", value=0)
 overs = st.number_input("Overs", value=0)
 wickets = st.number_input("Wickets", value=0)
 
-fours = st.number_input("Fours", value=0)
-sixes = st.number_input("Sixes", value=0)
-
-last_runs = st.number_input("Last Over Runs", value=0)
-last_boundaries = st.number_input("Last Over Boundaries", value=0)
-
-# Base team strength (simple logic)
+# Team base strength
 team_strength = {
-    "MI": 85,
-    "CSK": 88,
-    "RCB": 82,
-    "KKR": 84,
-    "SRH": 80
+    "MI": 170,
+    "CSK": 175,
+    "RCB": 180,
+    "KKR": 172,
+    "SRH": 168
 }
 
 if st.button("Predict 🔮"):
 
-    # Base prediction using team strength
-    strength1 = team_strength[team1] + random.randint(-5,5)
-    strength2 = team_strength[team2] + random.randint(-5,5)
+    # Base scores
+    base1 = team_strength[team1] + random.randint(-15, 15)
+    base2 = team_strength[team2] + random.randint(-15, 15)
 
-    # If match data available, adjust
+    # Adjust with live data (if given)
     if overs > 0:
         run_rate = score / overs
-        strength1 += run_rate * 2
-        strength1 -= wickets * 3
+        base1 += run_rate * 5
+        base1 -= wickets * 4
 
-    # Decide winner
-    if strength1 > strength2:
+    # Final predicted scores
+    score1 = int(base1)
+    score2 = int(base2)
+
+    # Boundary prediction based on score
+    def predict_boundaries(score):
+        fours = int(score * 0.28 + random.randint(-5,5))
+        sixes = int(score * 0.12 + random.randint(-3,3))
+        return max(10, fours), max(3, sixes)
+
+    fours1, sixes1 = predict_boundaries(score1)
+    fours2, sixes2 = predict_boundaries(score2)
+
+    # Winner
+    if score1 > score2:
         winner = team1
     else:
         winner = team2
 
-    # Predict boundaries
-    predicted_fours = random.randint(35, 70)
-    predicted_sixes = random.randint(8, 25)
+    # OUTPUT
+    st.subheader("Match Prediction 🧠")
 
-    # Results
-    st.subheader("Prediction Result 🎯")
+    st.write(f"🏏 {team1} Predicted Score: {score1}")
+    st.write(f"📊 {team1} Fours: {fours1}")
+    st.write(f"🚀 {team1} Sixes: {sixes1}")
 
-    st.success(f"🏆 Predicted Winner: {winner}")
+    st.write("---")
 
-    st.write(f"📊 Predicted Total Fours: {predicted_fours}")
-    st.write(f"🚀 Predicted Total Sixes: {predicted_sixes}")
+    st.write(f"🏏 {team2} Predicted Score: {score2}")
+    st.write(f"📊 {team2} Fours: {fours2}")
+    st.write(f"🚀 {team2} Sixes: {sixes2}")
 
-    # Basic signal
-    if predicted_fours > 50:
-        st.success("👉 HIGH boundary match (OVER likely)")
-    else:
-        st.warning("👉 Moderate/Low boundaries (UNDER possible)")
+    st.subheader(f"🏆 Winner: {winner}")
