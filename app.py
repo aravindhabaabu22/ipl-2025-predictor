@@ -1,85 +1,66 @@
 import streamlit as st
+import random
 
-st.title("IPL Trading Engine 🔥")
+st.title("IPL Smart Predictor 🔥")
 
-team1 = st.selectbox("Batting Team", ["MI","CSK","RCB","KKR","SRH"])
-team2 = st.selectbox("Bowling Team", ["MI","CSK","RCB","KKR","SRH"])
+teams = ["MI","CSK","RCB","KKR","SRH"]
 
-score = st.number_input("Score")
-overs = st.number_input("Overs Completed")
-wickets = st.number_input("Wickets Lost")
+team1 = st.selectbox("Team 1", teams)
+team2 = st.selectbox("Team 2", teams)
 
-fours = st.number_input("Total Fours")
-sixes = st.number_input("Total Sixes")
+st.subheader("Optional Match Inputs (can skip)")
 
-last_runs = st.number_input("Runs in last over")
-last_boundaries = st.number_input("Boundaries in last over")
+score = st.number_input("Score", value=0)
+overs = st.number_input("Overs", value=0)
+wickets = st.number_input("Wickets", value=0)
 
-# Phase detection
-if overs <= 6:
-    phase = "Powerplay ⚡"
-elif overs <= 15:
-    phase = "Middle Overs ⚖️"
-else:
-    phase = "Death Overs 🔥"
+fours = st.number_input("Fours", value=0)
+sixes = st.number_input("Sixes", value=0)
 
-st.subheader(f"Match Phase: {phase}")
+last_runs = st.number_input("Last Over Runs", value=0)
+last_boundaries = st.number_input("Last Over Boundaries", value=0)
 
-# Core calculations
-if overs > 0:
-    run_rate = score / overs
-    boundary_rate = (fours + sixes) / overs
-else:
-    run_rate = 0
-    boundary_rate = 0
+# Base team strength (simple logic)
+team_strength = {
+    "MI": 85,
+    "CSK": 88,
+    "RCB": 82,
+    "KKR": 84,
+    "SRH": 80
+}
 
-# Win probability
-win_prob = min(100, (run_rate * 10) - (wickets * 5))
-win_prob = max(0, win_prob)
+if st.button("Predict 🔮"):
 
-st.subheader(f"Win Probability: {win_prob:.2f}%")
+    # Base prediction using team strength
+    strength1 = team_strength[team1] + random.randint(-5,5)
+    strength2 = team_strength[team2] + random.randint(-5,5)
 
-# Momentum
-if last_runs > 15:
-    momentum = "HIGH"
-elif last_runs > 8:
-    momentum = "NORMAL"
-else:
-    momentum = "LOW"
+    # If match data available, adjust
+    if overs > 0:
+        run_rate = score / overs
+        strength1 += run_rate * 2
+        strength1 -= wickets * 3
 
-st.write(f"Momentum: {momentum}")
-
-# Smart decision engine
-st.subheader("Trading Signal 🎯")
-
-if phase == "Death Overs 🔥":
-    if momentum == "HIGH" and boundary_rate > 2:
-        st.success("🚀 STRONG OVER (Death overs explosion)")
-    elif momentum == "LOW":
-        st.error("🛑 UNDER (batting collapse risk)")
+    # Decide winner
+    if strength1 > strength2:
+        winner = team1
     else:
-        st.warning("⚠️ WAIT")
+        winner = team2
 
-elif phase == "Powerplay ⚡":
-    if boundary_rate > 2:
-        st.success("⚡ OVER (field restrictions)")
+    # Predict boundaries
+    predicted_fours = random.randint(35, 70)
+    predicted_sixes = random.randint(8, 25)
+
+    # Results
+    st.subheader("Prediction Result 🎯")
+
+    st.success(f"🏆 Predicted Winner: {winner}")
+
+    st.write(f"📊 Predicted Total Fours: {predicted_fours}")
+    st.write(f"🚀 Predicted Total Sixes: {predicted_sixes}")
+
+    # Basic signal
+    if predicted_fours > 50:
+        st.success("👉 HIGH boundary match (OVER likely)")
     else:
-        st.warning("⚠️ WAIT")
-
-else:
-    if momentum == "HIGH" and last_boundaries >= 2:
-        st.success("📈 OVER (build-up phase)")
-    elif momentum == "LOW":
-        st.error("📉 UNDER (slow phase)")
-    else:
-        st.warning("⚠️ NO CLEAR EDGE")
-
-# Entry timing
-st.subheader("Entry Timing ⏱️")
-
-if last_runs > 15 and last_boundaries >= 2:
-    st.success("👉 ENTER NOW")
-elif last_runs < 8:
-    st.error("👉 AVOID / EXIT")
-else:
-    st.warning("👉 WAIT FOR NEXT OVER")
+        st.warning("👉 Moderate/Low boundaries (UNDER possible)")
