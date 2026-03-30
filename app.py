@@ -1,8 +1,13 @@
+import streamlit as st
 import random
 import pandas as pd
 
+st.set_page_config(page_title="IPL Predictor", layout="centered")
+
+st.title("🏏 IPL Advanced Monte Carlo Predictor")
+
 # -----------------------------
-# TEAM DATA (Batting + Bowling)
+# TEAM DATA
 # -----------------------------
 teams = {
     "MI": {"bat": 1.05, "bowl": 1.00},
@@ -29,6 +34,18 @@ pitch = {
 }
 
 # -----------------------------
+# USER INPUT
+# -----------------------------
+team1 = st.selectbox("Select Team 1", list(teams.keys()))
+team2 = st.selectbox("Select Team 2", list(teams.keys()))
+venue = st.selectbox("Select Venue", list(pitch.keys()))
+sims = st.slider("Simulations", 500, 5000, 2000)
+
+if team1 == team2:
+    st.error("❌ Select two different teams")
+    st.stop()
+
+# -----------------------------
 # BALL SIMULATION
 # -----------------------------
 def simulate_ball(bat_strength, bowl_strength, phase, pitch_factor):
@@ -41,7 +58,6 @@ def simulate_ball(bat_strength, bowl_strength, phase, pitch_factor):
         "w": 0.05
     }
 
-    # Phase adjustments
     if phase == "powerplay":
         base_probs["4"] += 0.05
         base_probs["w"] += 0.02
@@ -49,12 +65,10 @@ def simulate_ball(bat_strength, bowl_strength, phase, pitch_factor):
         base_probs["6"] += 0.07
         base_probs["w"] += 0.03
 
-    # Apply strengths
     base_probs["4"] *= bat_strength
     base_probs["6"] *= bat_strength * pitch_factor
     base_probs["w"] *= bowl_strength
 
-    # Normalize
     total = sum(base_probs.values())
     probs = [v / total for v in base_probs.values()]
     outcomes = list(base_probs.keys())
@@ -79,6 +93,7 @@ def simulate_innings(team_bat, team_bowl, venue):
     bat = teams[team_bat]["bat"]
     bowl = teams[team_bowl]["bowl"]
     pitch_factor = pitch[venue]["six_factor"]
+    run_factor = pitch[venue]["run_factor"]
 
     total_runs = 0
     wickets = 0
@@ -89,7 +104,6 @@ def simulate_innings(team_bat, team_bowl, venue):
         if wickets >= 10:
             break
 
-        # Phase logic
         if over < 6:
             phase = "powerplay"
         elif over >= 16:
@@ -99,6 +113,8 @@ def simulate_innings(team_bat, team_bowl, venue):
 
         for ball in range(6):
             runs, wicket, f, s = simulate_ball(bat, bowl, phase, pitch_factor)
+
+            runs = int(runs * run_factor)
 
             total_runs += runs
             fours += f
@@ -115,43 +131,62 @@ def simulate_innings(team_bat, team_bowl, venue):
 # MATCH SIMULATION
 # -----------------------------
 def simulate_match(team1, team2, venue):
-    score1, f1, s1 = simulate_innings(team1, team2, venue)
-    score2, f2, s2 = simulate_innings(team2, team1, venue)
+    try:
+        s1, f1, x1 = simulate_innings(team1, team2, venue)
+        s2, f2, x2 = simulate_innings(team2, team1, venue)
 
-    winner = team1 if score1 > score2 else team2
-
-    return {
-        "score1": score1,
-        "score2": score2,
-        "fours_total": f1 + f2,
-        "sixes_total": s1 + s2,
-        "winner": winner
-    }
+        return {
+            "winner": team1 if s1 > s2 else team2,
+            "total_runs": s1 + s2,
+            "fours": f1 + f2,
+            "sixes": x1 + x2
+        }
+    except:
+        return {
+            "winner": team1,
+            "total_runs": 0,
+            "fours": 0,
+            "sixes": 0
+        }
 
 # -----------------------------
-# MONTE CARLO ENGINE
+# RUN SIMULATION
 # -----------------------------
-def monte_carlo(team1, team2, venue, sims=1000):
-    results = []
-
-    for _ in range(sims):
-        results.append(simulate_match(team1, team2, venue))
-
+if st.button("🔥 Run Simulation"):
+    results = [simulate_match(team1, team2, venue) for _ in range(sims)]
     df = pd.DataFrame(results)
 
-    summary = {
-        "avg_total_runs": (df["score1"] + df["score2"]).mean(),
-        "avg_fours": df["fours_total"].mean(),
-        "avg_sixes": df["sixes_total"].mean(),
-        "win_prob": df["winner"].value_counts(normalize=True) * 100
-    }
+    st.subheader("📊 Results")
 
-    return summary, df
+    win_prob = df["winner"].value_counts(normalize=True) * 100
 
-# -----------------------------
-# RUN IT
-# -----------------------------
-summary, df = monte_carlo("MI", "CSK", "Mumbai", sims=2000)
+    avg_runs = df["total_runs"].mean()
+    avg_fours = df["fours"].mean()
+    avg_sixes = df["sixes"].mean()
 
-print("\n🔥 ADVANCED SIMULATION RESULT")
-print(summary)
+    st.write("🏆 Win Probability")
+    st.write(win_prob)
+
+    st.write(f"📈 Avg Total Runs: {avg_runs:.2f}")
+    st.write(f"🏏 Avg Fours: {avg_fours:.2f}")
+    st.write(f"💥 Avg Sixes: {avg_sixes:.2f}")
+
+    # -----------------------------
+    # BETTING INSIGHTS
+    # -----------------------------
+    st.subheader("💰 Betting Insights")
+
+    if avg_fours > 30:
+        st.success("✅ Likely OVER on Fours")
+    else:
+        st.warning("⚠️ Likely UNDER on Fours")
+
+    if avg_sixes > 14:
+        st.success("✅ Likely OVER on Sixes")
+    else:
+        st.warning("⚠️ Likely UNDER on Sixes")
+
+    if avg_runs > 320:
+        st.success("🔥 High scoring match (OVER runs)")
+    else:
+        st.warning("🧊 Low scoring match (UNDER runs)")
